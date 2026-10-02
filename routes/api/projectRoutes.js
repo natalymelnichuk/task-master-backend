@@ -3,7 +3,7 @@
 const router = require('express').Router();
 const { getProjects, createProject, updateProject, deleteProject, getProjectById } = require("../../controllers/projectControllers")
 const { authMiddleware } = require('../../utils/auth');
-const { getTasksByProject } = require('../../controllers/taskController');
+const { getTasksByProject, createTask } = require('../../controllers/taskController');
 
 // Apply authMiddleware to all routes in this file
 router.use(authMiddleware);
@@ -26,5 +26,8 @@ router.get('/:id', getProjectById);
 
 // GET /api/projects/:projectId/tasks - Get all tasks for a specific project
 router.get('/:projectId/tasks', getTasksByProject);
+
+// POST /api/projects/:projectId/tasks - Create a new task for a specific project
+router.post('/:projectId/tasks', createTask);
 
 module.exports = router;

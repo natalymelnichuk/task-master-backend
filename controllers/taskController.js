@@ -5,9 +5,16 @@ const Project = require('../models/Project');
 // POST /api/tasks — Create a new task
 async function createTask(req, res) {
     try {
+
+        const projectId = req.body.project || req.params.projectId;
+
+        if (!projectId) {
+            return res.status(400).json({ message: 'Project ID is required.' });
+        }
+
         // 1. Check if the user has access to the project
         const project = await Project.findOne({
-        _id: req.body.project,
+        _id: projectId,
         user: req.user._id,
         });
 
@@ -16,7 +23,10 @@ async function createTask(req, res) {
         }
 
         // 2. Create the task
-        const task = await Task.create(req.body);
+        const task = await Task.create({
+            ...req.body,
+            project: projectId,
+        });
 
         res.status(201).json(task);
     } catch (err) {
