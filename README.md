@@ -81,7 +81,7 @@ task-master-app/
     PORT=3000
     MONGODB_URI=MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/<database_name>?appName=Cluster0
 
-    JWT_SECRET=your_jwt_secret_key
+    JWT_SECRET=type_your_secret
    ```
 
    **Note:** Replace username, password and database_name with your actual MongoDB Atlas connection details.
@@ -235,7 +235,6 @@ Authorization: Bearer <YOUR_JWT_TOKEN>
   }
   ```
 
----
 
 ### Tasks Routes
 
